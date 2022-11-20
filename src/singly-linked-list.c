@@ -112,8 +112,7 @@ void insert(int index, int data, struct Node **headNode) {
 
 		struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
 		newNode->data = data;
-		newNode->nextNode = NULL;
-
+		
 		newNode->nextNode = *headNode;
 		*headNode = newNode;
 
@@ -126,7 +125,6 @@ void insert(int index, int data, struct Node **headNode) {
 
 				struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
 				newNode->data = data;
-				newNode->nextNode = NULL;
 
 				struct Node *indexNode = preIndexNode->nextNode;
 
