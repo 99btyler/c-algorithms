@@ -179,7 +179,7 @@ void removeIndex(int index, struct Node **headNode) {
 
 void removeData(int data, struct Node **headNode) {
 
-	if ((*headNode)->data == data) {
+	if (data == (*headNode)->data) {
 
 		struct Node *dataNode = *headNode;
 
