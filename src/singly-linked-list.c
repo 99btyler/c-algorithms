@@ -7,11 +7,11 @@ struct Node {
 	struct Node *nextNode;
 };
 
-void printSinglyLinkedList(struct Node *startingNode) {
+void printSinglyLinkedList(struct Node *node) {
 
-	while (startingNode != NULL) {
-		printf("%d[%d] ", startingNode->data, (startingNode->nextNode != NULL ? startingNode->nextNode->data : 0));
-		startingNode = startingNode->nextNode;
+	while (node != NULL) {
+		printf("%d[%d] ", node->data, (node->nextNode != NULL ? node->nextNode->data : 0));
+		node = node->nextNode;
 	}
 
 	printf("\n");

@@ -8,11 +8,11 @@ struct Node {
 	struct Node *previousNode;
 };
 
-void printDoublyLinkedList(struct Node *startingNode) {
+void printDoublyLinkedList(struct Node *node) {
 
-	while (startingNode != NULL) {
-		printf("[%d]%d[%d] ", (startingNode->previousNode != NULL ? startingNode->previousNode->data : 0), startingNode->data, (startingNode->nextNode != NULL ? startingNode->nextNode->data : 0));
-		startingNode = startingNode->nextNode;
+	while (node != NULL) {
+		printf("[%d]%d[%d] ", (node->previousNode != NULL ? node->previousNode->data : 0), node->data, (node->nextNode != NULL ? node->nextNode->data : 0));
+		node = node->nextNode;
 	}
 
 	printf("\n");
