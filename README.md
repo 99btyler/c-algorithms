@@ -6,9 +6,9 @@ Get this project set up locally
 * Clone this repository
 * Using a text editor, open this repository
 ### Running
-* Using terminal, navigate to src. Type `g++ filename.cpp -o bin/filename` and then `./bin/filename`
+* Using terminal, navigate to src. Type `gcc filename.c -o bin/filename` and then `./bin/filename`
 # What's included
-* SinglyLinkedList, DoublyLinkedList
+* SinglyLinkedList, DoublyLinkedList, CircularSinglyLinkedList
   * get(int index)
   * indexOf(int data)
   * size()
