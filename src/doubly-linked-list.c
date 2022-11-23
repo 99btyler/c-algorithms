@@ -154,6 +154,10 @@ void insert(int index, int data, struct Node **headNode) {
 
 void removeIndex(int index, struct Node **headNode) {
 
+	if (*headNode == NULL) {
+		return;
+	}
+
 	if (index == 0) {
 
 		struct Node *indexNode = *headNode;
@@ -193,6 +197,10 @@ void removeIndex(int index, struct Node **headNode) {
 
 void removeData(int data, struct Node **headNode) {
 
+	if (*headNode == NULL) {
+		return;
+	}
+
 	if (data == (*headNode)->data) {
 
 		struct Node *dataNode = *headNode;
@@ -229,6 +237,10 @@ void removeData(int data, struct Node **headNode) {
 }
 
 void clear(struct Node **headNode) {
+
+	if (*headNode == NULL) {
+		return;
+	}
 
 	struct Node *node = *headNode;
 	while (node != NULL) {
