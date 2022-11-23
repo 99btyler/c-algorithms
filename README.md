@@ -8,7 +8,7 @@ Get this project set up locally
 ### Running
 * Using terminal, navigate to src. Type `gcc filename.c -o bin/filename` and then `./bin/filename`
 # What's included
-* SinglyLinkedList, DoublyLinkedList, CircularSinglyLinkedList
+* SinglyLinkedList, DoublyLinkedList, CircularSinglyLinkedList, CircularDoublyLinkedList
   * get(int index)
   * indexOf(int data)
   * size()
