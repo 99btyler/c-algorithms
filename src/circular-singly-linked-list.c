@@ -141,6 +141,10 @@ void insert(int index, int data, struct Node **headNode) {
 
 	} else {
 
+		if (*headNode == NULL) {
+			return;
+		}
+
 		struct Node *preIndexNode = *headNode;
 		int i = 0;
 		while (preIndexNode != NULL) {
