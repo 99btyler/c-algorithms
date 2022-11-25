@@ -11,8 +11,8 @@ Get this project set up locally
 * SinglyLinkedList, DoublyLinkedList, CircularSinglyLinkedList, CircularDoublyLinkedList
   * get(int index)
   * indexOf(int data)
-  * size()
   * contains(int data)
+  * size()
   * add(int data)
   * insert(int index, int data)
   * removeIndex(int index)

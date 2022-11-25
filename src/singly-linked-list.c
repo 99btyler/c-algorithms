@@ -52,19 +52,6 @@ int indexOf(int data, struct Node **headNode) {
 
 }
 
-int size(struct Node **headNode) {
-
-	struct Node *node = *headNode;
-	int i = 0;
-	while (node != NULL) {
-		node = node->nextNode;
-		i += 1;
-	}
-
-	return i;
-
-}
-
 bool contains(int data, struct Node **headNode) {
 
 	struct Node *dataNode = *headNode;
@@ -78,6 +65,19 @@ bool contains(int data, struct Node **headNode) {
 	}
 
 	return false;
+
+}
+
+int size(struct Node **headNode) {
+
+	struct Node *node = *headNode;
+	int i = 0;
+	while (node != NULL) {
+		node = node->nextNode;
+		i += 1;
+	}
+
+	return i;
 
 }
 
