@@ -18,7 +18,7 @@ Get this project set up locally
   * removeIndex(int index)
   * removeData(int data)
   * clear()
-* Stack
+* Stack, Queue
   * peek()
   * isFull()
   * isEmpty()
