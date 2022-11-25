@@ -1,7 +1,7 @@
 #include <stdbool.h> 
 #include <stdio.h>
 
-#define CAPACITY 3
+#define CAPACITY 10
 
 struct Stack {
 	int index_top;
@@ -11,8 +11,9 @@ struct Stack {
 void printStack(struct Stack *stack) {
 
 	for (int i = 0; i <= stack->index_top; i++) {
-		printf("%d=>", stack->items[i]);
+		printf("=%d", stack->items[i]);
 	}
+	printf("=>");
 
 	printf("\n");
 
@@ -60,14 +61,15 @@ int main() {
 	struct Stack stack;
 	stack.index_top = -1;
 
-	push(1, &stack);
-	push(2, &stack);
-	push(3, &stack);
-	printf("Top is: %d\n", peek(&stack));
-	pop(&stack);
-	printf("Top is: %d\n", peek(&stack));
-	pop(&stack);
-	pop(&stack);
+	printf("Top: %d\n", peek(&stack));
+	for (int i = 0; i < CAPACITY; i++) {
+		push(i+1, &stack);
+	}
+	printf("Top: %d\n", peek(&stack));
+	for (int i = 0; i < CAPACITY; i++) {
+		pop(&stack);
+	}
+	printf("Top: %d\n", peek(&stack));
 
 	return 0;
 
