@@ -95,10 +95,7 @@ void add(int data, struct Node **headNode) {
 
 	} else {
 
-		struct Node *lastNode = *headNode;
-		while (lastNode->nextNode != NULL) {
-			lastNode = lastNode->nextNode;
-		}
+		struct Node *lastNode = (*headNode)->previousNode;
 
 		lastNode->nextNode = newNode;
 		newNode->previousNode = lastNode;
