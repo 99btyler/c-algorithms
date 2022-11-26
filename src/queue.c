@@ -1,56 +1,52 @@
 #include <stdbool.h> 
 #include <stdio.h>
 
-#define CAPACITY 10
+#define CAPACITY 3
 
 struct Queue {
 	int index_front;
 	int index_back;
 	int items[CAPACITY];
-	int size;
 };
 
 void printQueue(struct Queue *queue) {
 
-	if (queue->size != 0) {
-		printf("=%d", queue->items[queue->index_back]);
-		if (queue->size > 1) {
-			for (int i = 0; i < queue->size-2; i++) {
-				printf("=*");
-			}
-			printf("=%d", queue->items[queue->index_front]);
+	printf("<=");
+	if (queue->index_front > -1) {
+		for (int i = queue->index_front; i <= queue->index_back; i++) {
+			printf("%d=", queue->items[i]);
 		}
 	}
-	printf("=>");
 
 	printf("\n");
 
 }
 
 int peek(struct Queue *queue) {
-	return queue->size != 0 ? queue->items[queue->index_front] : -1;
+	return queue->items[queue->index_front];
 }
 
 bool isFull(struct Queue *queue) {
-	return queue->size >= CAPACITY;
+	return queue->index_back >= CAPACITY-1;
 }
 
 bool isEmpty(struct Queue *queue) {
-	return queue->size == 0;
+	return queue->index_front <= -1 || queue->index_front > queue->index_back;
 }
 
 void push(int data, struct Queue *queue) {
 
 	if (isFull(queue)) {
+		printf("queue is full (data %d rejected)\n", data);
 		return;
 	}
 
-	if (queue->index_front == -1) {
+	if (queue->index_front <= -1) {
 		queue->index_front = 0;
 	}
-	queue->index_back = (queue->index_back + 1) % CAPACITY;
+
+	queue->index_back += 1;
 	queue->items[queue->index_back] = data;
-	queue->size += 1;
 
 	printQueue(queue); // For demonstration
 
@@ -59,32 +55,44 @@ void push(int data, struct Queue *queue) {
 void pop(struct Queue *queue) {
 
 	if (isEmpty(queue)) {
+		printf("stack is empty (pop rejected)\n");
 		return;
 	}
 
-	queue->index_front = (queue->index_front + 1) % CAPACITY;
-	queue->size -= 1;
+	queue->index_front += 1;
 
 	printQueue(queue); // For demonstration
 
 }
 
-int main () {
+int main() {
 
 	struct Queue queue;
 	queue.index_front = -1;
 	queue.index_back = -1;
-	queue.size = 0;
 
-	printf("Front: %d\n", peek(&queue));
-	for (int i = 0; i < CAPACITY; i++) {
-		push(i+1, &queue);
-	}
-	printf("Front: %d\n", peek(&queue));
-	for (int i = 0; i < CAPACITY; i++) {
-		pop(&queue);
-	}
-	printf("Front: %d\n", peek(&queue));
+	printf("Data at front: %d\n", peek(&queue));
+	pop(&queue);
+
+	push(1, &queue);
+	push(2, &queue);
+	push(3, &queue);
+	printf("Data at front: %d\n", peek(&queue));
+
+	pop(&queue);
+	pop(&queue);
+	pop(&queue);
+	printf("Data at front: %d\n", peek(&queue));
+
+	push(4, &queue);
+	push(5, &queue);
+	push(6, &queue);
+	printf("Data at front: %d\n", peek(&queue));
+
+	pop(&queue);
+	pop(&queue);
+	pop(&queue);
+	printf("Data at front: %d\n", peek(&queue));
 
 	return 0;
 

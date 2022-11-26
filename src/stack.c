@@ -1,7 +1,7 @@
 #include <stdbool.h> 
 #include <stdio.h>
 
-#define CAPACITY 10
+#define CAPACITY 3
 
 struct Stack {
 	int index_top;
@@ -20,20 +20,21 @@ void printStack(struct Stack *stack) {
 }
 
 int peek(struct Stack *stack) {
-	return stack->items[stack->index_top];
+	return stack->index_top != -1 ? stack->items[stack->index_top] : 0;
 }
 
 bool isFull(struct Stack *stack) {
-	return stack->index_top == CAPACITY-1;
+	return stack->index_top >= CAPACITY-1;
 }
 
 bool isEmpty(struct Stack *stack) {
-	return stack->index_top == -1;
+	return stack->index_top <= -1;
 }
 
 void push(int data, struct Stack *stack) {
 
 	if (isFull(stack)) {
+		printf("stack is full (data %d rejected)\n", data);
 		return;
 	}
 
@@ -47,6 +48,7 @@ void push(int data, struct Stack *stack) {
 void pop(struct Stack *stack) {
 
 	if (isEmpty(stack)) {
+		printf("stack is empty (pop rejected)\n");
 		return;
 	}
 
@@ -61,15 +63,29 @@ int main() {
 	struct Stack stack;
 	stack.index_top = -1;
 
-	printf("Top: %d\n", peek(&stack));
-	for (int i = 0; i < CAPACITY; i++) {
-		push(i+1, &stack);
-	}
-	printf("Top: %d\n", peek(&stack));
-	for (int i = 0; i < CAPACITY; i++) {
-		pop(&stack);
-	}
-	printf("Top: %d\n", peek(&stack));
+	printf("Data at top: %d\n", peek(&stack));
+	pop(&stack);
+
+	push(1, &stack);
+	push(2, &stack);
+	push(3, &stack);
+	printf("Data at top: %d\n", peek(&stack));
+
+	pop(&stack);
+	pop(&stack);
+	pop(&stack);
+	printf("Data at top: %d\n", peek(&stack));
+
+	push(4, &stack);
+	push(5, &stack);
+	push(6, &stack);
+	printf("Data at top: %d\n", peek(&stack));
+
+	pop(&stack);
+	pop(&stack);
+	pop(&stack);
+	printf("Data at top: %d\n", peek(&stack));
+
 
 	return 0;
 
