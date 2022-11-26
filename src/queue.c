@@ -23,7 +23,7 @@ void printQueue(struct Queue *queue) {
 }
 
 int peek(struct Queue *queue) {
-	return queue->items[queue->index_front];
+	return (queue->index_front > -1 && queue->index_front <= CAPACITY-1 && queue->index_front <= queue->index_back) ? queue->items[queue->index_front] : 0;
 }
 
 bool isFull(struct Queue *queue) {
@@ -55,7 +55,7 @@ void push(int data, struct Queue *queue) {
 void pop(struct Queue *queue) {
 
 	if (isEmpty(queue)) {
-		printf("stack is empty (pop rejected)\n");
+		printf("queue is empty (pop rejected)\n");
 		return;
 	}
 
@@ -73,26 +73,16 @@ int main() {
 
 	printf("Data at front: %d\n", peek(&queue));
 	pop(&queue);
-
-	push(1, &queue);
-	push(2, &queue);
-	push(3, &queue);
-	printf("Data at front: %d\n", peek(&queue));
-
-	pop(&queue);
-	pop(&queue);
-	pop(&queue);
-	printf("Data at front: %d\n", peek(&queue));
-
-	push(4, &queue);
-	push(5, &queue);
-	push(6, &queue);
-	printf("Data at front: %d\n", peek(&queue));
-
-	pop(&queue);
-	pop(&queue);
-	pop(&queue);
-	printf("Data at front: %d\n", peek(&queue));
+	for (int i = 0; i < 2; i++) {
+		for (int index = 0; index < CAPACITY; index++) {
+			push(index+1, &queue);
+		}
+		printf("Data at front: %d\n", peek(&queue));
+		for (int index = 0; index < CAPACITY; index++) {
+			pop(&queue);
+		}
+		printf("Data at front: %d\n", peek(&queue));
+	}
 
 	return 0;
 

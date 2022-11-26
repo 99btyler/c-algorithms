@@ -20,7 +20,7 @@ void printStack(struct Stack *stack) {
 }
 
 int peek(struct Stack *stack) {
-	return stack->index_top != -1 ? stack->items[stack->index_top] : 0;
+	return stack->index_top > -1 ? stack->items[stack->index_top] : 0;
 }
 
 bool isFull(struct Stack *stack) {
@@ -65,27 +65,16 @@ int main() {
 
 	printf("Data at top: %d\n", peek(&stack));
 	pop(&stack);
-
-	push(1, &stack);
-	push(2, &stack);
-	push(3, &stack);
-	printf("Data at top: %d\n", peek(&stack));
-
-	pop(&stack);
-	pop(&stack);
-	pop(&stack);
-	printf("Data at top: %d\n", peek(&stack));
-
-	push(4, &stack);
-	push(5, &stack);
-	push(6, &stack);
-	printf("Data at top: %d\n", peek(&stack));
-
-	pop(&stack);
-	pop(&stack);
-	pop(&stack);
-	printf("Data at top: %d\n", peek(&stack));
-
+	for (int i = 0; i < 2; i++) {
+		for (int index = 0; index < CAPACITY; index++) {
+			push(index+1, &stack);
+		}
+		printf("Data at top: %d\n", peek(&stack));
+		for (int index = 0; index < CAPACITY; index++) {
+			pop(&stack);
+		}
+		printf("Data at top: %d\n", peek(&stack));
+	}
 
 	return 0;
 
