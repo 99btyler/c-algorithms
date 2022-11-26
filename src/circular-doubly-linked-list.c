@@ -8,18 +8,34 @@ struct Node {
 	struct Node *previousNode;
 };
 
-void printCircularDoublyLinkedList(struct Node *node) {
+int get(int index, struct Node **headNode);
+int indexOf(int data, struct Node **headNode);
+bool contains(int data, struct Node **headNode);
+int size(struct Node **headNode);
+void add(int data, struct Node **headNode);
+void insert(int index, int data, struct Node **headNode);
+void removeIndex(int index, struct Node **headNode);
+void removeData(int data, struct Node **headNode);
+void clear(struct Node **headNode);
+void printCircularDoublyLinkedList(struct Node *node);
 
-	struct Node *startingNode = node;
-	while (node != NULL) {
-		printf("[%d]%d[%d] ", (node->previousNode != NULL ? node->previousNode->data : 0), node->data, (node->nextNode != NULL ? node->nextNode->data : 0));
-		node = node->nextNode;
-		if (node == startingNode) {
-			break;
-		}
-	}
+int main() {
 
-	printf("\n");
+	struct Node *headNode = NULL;
+
+	add(1, &headNode);
+	add(2, &headNode);
+	add(3, &headNode);
+	printf("Data at index 1: %d\n", get(1, &headNode));
+	removeIndex(1, &headNode);
+	insert(1, 99, &headNode);
+	printf("Index of 99: %d\n", indexOf(99, &headNode));
+	removeData(99, &headNode);
+	printf("Size: %d\n", size(&headNode));
+	printf("Contains 99: %d\n", contains(99, &headNode));
+	clear(&headNode);
+
+	return 0;
 
 }
 
@@ -120,7 +136,7 @@ void add(int data, struct Node **headNode) {
 
 	}
 
-	printCircularDoublyLinkedList(*headNode); // For demonstration
+	printCircularDoublyLinkedList(*headNode); // For main
 
 }
 
@@ -170,7 +186,7 @@ void insert(int index, int data, struct Node **headNode) {
 
 	}
 
-	printCircularDoublyLinkedList(*headNode); // For demonstration
+	printCircularDoublyLinkedList(*headNode); // For main
 
 }
 
@@ -217,7 +233,7 @@ void removeIndex(int index, struct Node **headNode) {
 
 	}
 
-	printCircularDoublyLinkedList(*headNode); // For demonstration
+	printCircularDoublyLinkedList(*headNode); // For main
 
 }
 
@@ -262,7 +278,7 @@ void removeData(int data, struct Node **headNode) {
 
 	}
 
-	printCircularDoublyLinkedList(*headNode); // For demonstration
+	printCircularDoublyLinkedList(*headNode); // For main
 
 }
 
@@ -287,26 +303,21 @@ void clear(struct Node **headNode) {
 
 	*headNode = NULL;
 
-	printCircularDoublyLinkedList(*headNode); // For demonstration
+	printCircularDoublyLinkedList(*headNode); // For main
 
 }
 
-int main() {
+void printCircularDoublyLinkedList(struct Node *node) {
 
-	struct Node *headNode = NULL;
+	struct Node *startingNode = node;
+	while (node != NULL) {
+		printf("[%d]%d[%d] ", (node->previousNode != NULL ? node->previousNode->data : 0), node->data, (node->nextNode != NULL ? node->nextNode->data : 0));
+		node = node->nextNode;
+		if (node == startingNode) {
+			break;
+		}
+	}
 
-	add(1, &headNode);
-	add(2, &headNode);
-	add(3, &headNode);
-	printf("Data at index 1: %d\n", get(1, &headNode));
-	removeIndex(1, &headNode);
-	insert(1, 99, &headNode);
-	printf("Index of 99: %d\n", indexOf(99, &headNode));
-	removeData(99, &headNode);
-	printf("Size: %d\n", size(&headNode));
-	printf("Contains 99: %d\n", contains(99, &headNode));
-	clear(&headNode);
-
-	return 0;
+	printf("\n");
 
 }

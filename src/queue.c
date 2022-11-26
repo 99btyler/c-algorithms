@@ -9,16 +9,33 @@ struct Queue {
 	int items[CAPACITY];
 };
 
-void printQueue(struct Queue *queue) {
+int peek(struct Queue *queue);
+bool isFull(struct Queue *queue);
+bool isEmpty(struct Queue *queue);
+void push(int data, struct Queue *queue);
+void pop(struct Queue *queue);
+void printQueue(struct Queue *queue);
 
-	printf("<=");
-	if (queue->index_front > -1) {
-		for (int i = queue->index_front; i <= queue->index_back; i++) {
-			printf("%d=", queue->items[i]);
+int main() {
+
+	struct Queue queue;
+	queue.index_front = -1;
+	queue.index_back = -1;
+
+	printf("Data at front: %d\n", peek(&queue));
+	pop(&queue);
+	for (int i = 0; i < 2; i++) {
+		for (int index = 0; index < CAPACITY; index++) {
+			push(index+1, &queue);
 		}
+		printf("Data at front: %d\n", peek(&queue));
+		for (int index = 0; index < CAPACITY; index++) {
+			pop(&queue);
+		}
+		printf("Data at front: %d\n", peek(&queue));
 	}
 
-	printf("\n");
+	return 0;
 
 }
 
@@ -48,7 +65,7 @@ void push(int data, struct Queue *queue) {
 	queue->index_back += 1;
 	queue->items[queue->index_back] = data;
 
-	printQueue(queue); // For demonstration
+	printQueue(queue); // For main
 
 }
 
@@ -61,29 +78,19 @@ void pop(struct Queue *queue) {
 
 	queue->index_front += 1;
 
-	printQueue(queue); // For demonstration
+	printQueue(queue); // For main
 
 }
 
-int main() {
+void printQueue(struct Queue *queue) {
 
-	struct Queue queue;
-	queue.index_front = -1;
-	queue.index_back = -1;
-
-	printf("Data at front: %d\n", peek(&queue));
-	pop(&queue);
-	for (int i = 0; i < 2; i++) {
-		for (int index = 0; index < CAPACITY; index++) {
-			push(index+1, &queue);
+	printf("<=");
+	if (queue->index_front > -1) {
+		for (int i = queue->index_front; i <= queue->index_back; i++) {
+			printf("%d=", queue->items[i]);
 		}
-		printf("Data at front: %d\n", peek(&queue));
-		for (int index = 0; index < CAPACITY; index++) {
-			pop(&queue);
-		}
-		printf("Data at front: %d\n", peek(&queue));
 	}
 
-	return 0;
+	printf("\n");
 
 }

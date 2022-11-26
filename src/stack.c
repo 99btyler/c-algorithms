@@ -8,14 +8,32 @@ struct Stack {
 	int items[CAPACITY];
 };
 
-void printStack(struct Stack *stack) {
+int peek(struct Stack *stack);
+bool isFull(struct Stack *stack);
+bool isEmpty(struct Stack *stack);
+void push(int data, struct Stack *stack);
+void pop(struct Stack *stack);
+void printStack(struct Stack *stack);
 
-	for (int i = 0; i <= stack->index_top; i++) {
-		printf("=%d", stack->items[i]);
+int main() {
+
+	struct Stack stack;
+	stack.index_top = -1;
+
+	printf("Data at top: %d\n", peek(&stack));
+	pop(&stack);
+	for (int i = 0; i < 2; i++) {
+		for (int index = 0; index < CAPACITY; index++) {
+			push(index+1, &stack);
+		}
+		printf("Data at top: %d\n", peek(&stack));
+		for (int index = 0; index < CAPACITY; index++) {
+			pop(&stack);
+		}
+		printf("Data at top: %d\n", peek(&stack));
 	}
-	printf("=>");
 
-	printf("\n");
+	return 0;
 
 }
 
@@ -41,7 +59,7 @@ void push(int data, struct Stack *stack) {
 	stack->index_top += 1;
 	stack->items[stack->index_top] = data;
 
-	printStack(stack); // For demonstration
+	printStack(stack); // For main
 
 }
 
@@ -54,28 +72,17 @@ void pop(struct Stack *stack) {
 
 	stack->index_top -= 1;
 
-	printStack(stack); // For demonstration
+	printStack(stack); // For main
 
 }
 
-int main() {
+void printStack(struct Stack *stack) {
 
-	struct Stack stack;
-	stack.index_top = -1;
-
-	printf("Data at top: %d\n", peek(&stack));
-	pop(&stack);
-	for (int i = 0; i < 2; i++) {
-		for (int index = 0; index < CAPACITY; index++) {
-			push(index+1, &stack);
-		}
-		printf("Data at top: %d\n", peek(&stack));
-		for (int index = 0; index < CAPACITY; index++) {
-			pop(&stack);
-		}
-		printf("Data at top: %d\n", peek(&stack));
+	for (int i = 0; i <= stack->index_top; i++) {
+		printf("=%d", stack->items[i]);
 	}
+	printf("=>");
 
-	return 0;
+	printf("\n");
 
 }
