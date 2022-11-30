@@ -24,3 +24,7 @@ Get this project set up locally
   * isEmpty()
   * push(int data)
   * pop()
+* BinarySearchTree
+  * get(int data)
+  * add(int data)
+  * removeData(int data)
