@@ -7,40 +7,40 @@ struct Node {
 	struct Node *rightNode;
 };
 
-struct Node* get(int data, struct Node *node);
-struct Node* add(int data, struct Node *node);
-struct Node* removeData(int data, struct Node *node);
-void printBinarySearchTree(struct Node *node);
+struct Node* search(int data, struct Node **rootNode);
+struct Node* recursive_search(int data, struct Node *node);
+void insert(int data, struct Node **rootNode);
+struct Node* recursive_insert(int data, struct Node *node);
+void delete(int data, struct Node **rootNode);
+struct Node* recursive_delete(int data, struct Node *node);
+void printBinarySearchTree(struct Node **rootNode);
+void recursive_printBinarySearchTree(struct Node *node);
 
 int main() {
 
 	struct Node *rootNode = NULL;
 
-	rootNode = add(4, rootNode);
-	rootNode = add(2, rootNode);
-	rootNode = add(5, rootNode);
-	rootNode = add(1, rootNode);
-	rootNode = add(3, rootNode);
-	rootNode = add(6, rootNode);
-
-	printBinarySearchTree(rootNode);
-	printf("\n");
-
-	struct Node *dataNode = get(3, rootNode);
-	printf("Data 3: %d\n", dataNode != NULL ? dataNode->data : 0);
-	dataNode = get(99, rootNode);
-	printf("Data 99: %d\n", dataNode != NULL ? dataNode->data : 0);
-
-	rootNode = removeData(2, rootNode);
-
-	printBinarySearchTree(rootNode);
-	printf("\n");
+	insert(4, &rootNode);
+	insert(2, &rootNode);
+	insert(5, &rootNode);
+	insert(1, &rootNode);
+	insert(3, &rootNode);
+	insert(6, &rootNode);
+	printf("Data 3 exists: %d\n", search(3, &rootNode) != NULL ? 1 : 0);
+	printf("Data 99 exists: %d\n", search(99, &rootNode) != NULL ? 1 : 0);
+	delete(2, &rootNode);
 
 	return 0;
 
 }
 
-struct Node* get(int data, struct Node *node) {
+struct Node* search(int data, struct Node **rootNode) {
+
+	return recursive_search(data, *rootNode);
+
+}
+
+struct Node* recursive_search(int data, struct Node *node) {
 
 	if (node == NULL || node->data == data) {
 
@@ -49,9 +49,9 @@ struct Node* get(int data, struct Node *node) {
 	} else {
 
 		if (data < node->data) {
-			return get(data, node->leftNode);
+			return recursive_search(data, node->leftNode);
 		} else if (data > node->data) {
-			return get(data, node->rightNode);
+			return recursive_search(data, node->rightNode);
 		}
 
 		return node;
@@ -60,7 +60,15 @@ struct Node* get(int data, struct Node *node) {
 
 }
 
-struct Node* add(int data, struct Node *node) {
+void insert(int data, struct Node **rootNode) {
+
+	*rootNode = recursive_insert(data, *rootNode);
+
+	printBinarySearchTree(rootNode); // For main
+
+}
+
+struct Node* recursive_insert(int data, struct Node *node) {
 
 	if (node == NULL) {
 
@@ -74,9 +82,9 @@ struct Node* add(int data, struct Node *node) {
 	} else {
 
 		if (data < node->data) {
-			node->leftNode = add(data, node->leftNode);
+			node->leftNode = recursive_insert(data, node->leftNode);
 		} else if (data > node->data) {
-			node->rightNode = add(data, node->rightNode);
+			node->rightNode = recursive_insert(data, node->rightNode);
 		}
 
 		return node;
@@ -85,7 +93,15 @@ struct Node* add(int data, struct Node *node) {
 
 }
 
-struct Node* removeData(int data, struct Node *node) {
+void delete(int data, struct Node **rootNode) {
+
+	*rootNode = recursive_delete(data, *rootNode);
+
+	printBinarySearchTree(rootNode); // For main
+
+}
+
+struct Node* recursive_delete(int data, struct Node *node) {
 
 	if (node == NULL) {
 
@@ -94,9 +110,9 @@ struct Node* removeData(int data, struct Node *node) {
 	} else {
 
 		if (data < node->data) {
-			node->leftNode = removeData(data, node->leftNode);
+			node->leftNode = recursive_delete(data, node->leftNode);
 		} else if (data > node->data) {
-			node->rightNode = removeData(data, node->rightNode);
+			node->rightNode = recursive_delete(data, node->rightNode);
 		} else {
 
 			if (node->leftNode == NULL) {
@@ -123,7 +139,7 @@ struct Node* removeData(int data, struct Node *node) {
 				}
 				node->data = maxLeftNode->data;
 
-				node->leftNode = removeData(maxLeftNode->data, node->leftNode);
+				node->leftNode = recursive_delete(maxLeftNode->data, node->leftNode);
 
 			}
 
@@ -135,14 +151,22 @@ struct Node* removeData(int data, struct Node *node) {
 
 }
 
-void printBinarySearchTree(struct Node *node) {
+void printBinarySearchTree(struct Node **rootNode) {
+
+	recursive_printBinarySearchTree(*rootNode);
+
+	printf("\n");
+
+}
+
+void recursive_printBinarySearchTree(struct Node *node) {
 
 	if (node == NULL) {
 		return;
 	}
 
-	printBinarySearchTree(node->leftNode);
+	recursive_printBinarySearchTree(node->leftNode);
 	printf("[%d]%d[%d] ", (node->leftNode != NULL ? node->leftNode->data : 0), node->data, (node->rightNode != NULL ? node->rightNode->data : 0));
-	printBinarySearchTree(node->rightNode);
+	recursive_printBinarySearchTree(node->rightNode);
 
 }

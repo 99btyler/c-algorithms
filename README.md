@@ -25,6 +25,6 @@ Get this project set up locally
   * push(int data)
   * pop()
 * BinarySearchTree
-  * get(int data)
-  * add(int data)
-  * removeData(int data)
+  * search(int data)
+  * insert(int data)
+  * delete(int data)
