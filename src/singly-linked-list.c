@@ -44,7 +44,9 @@ int get(int index, struct Node **headNode) {
 	int i = 0;
 	while (indexNode != NULL) {
 		if (i == index) {
+
 			return indexNode->data;
+			
 		}
 		indexNode = indexNode->nextNode;
 		i += 1;
