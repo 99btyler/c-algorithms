@@ -1,5 +1,5 @@
 # c-algorithms
-
+Some algorithms and data structures for learning
 # Getting Started
 Get this project set up locally
 ### Setting up
